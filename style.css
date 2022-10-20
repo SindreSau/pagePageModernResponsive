@@ -1,14 +1,28 @@
+/* animasjoner er ut-kommentert */
+html {
+    scroll-behavior: smooth;
+    scrollbar-arrow-color: black;
+    scrollbar-width: 0;
+    scrollbar-3dlight-color: aquamarine;
+    scrollbar-base-color: beige;
+}
+
 body {
-    height: 150vh;
+    height: fit-content;
     padding: 0;
     margin: 0;
-    overflow: hidden;
-    background: radial-gradient(circle at -10% 100%, rgb(104, 172, 224), rgb(0, 52, 115)) no-repeat;
+
     animation: fadeIn ease 3s;
 }
 
+.navMain {
+    position: relative;
+    height: 100vh;
+    background: radial-gradient(circle at -10% 100%, rgb(104, 172, 224), rgb(0, 52, 115)) no-repeat;
+    background-attachment: fixed;
+}
 
-@keyframes fadeIn {
+/* @keyframes fadeIn {
     0% {
         opacity: 0;
     }
@@ -16,7 +30,11 @@ body {
     100% {
         opacity: 1;
     }
-}
+} */
+
+/*================================================================================================*/
+/*                              Nav Content                                                       */
+/*================================================================================================*/
 
 .logo {
     font-family: 'Righteous', cursive;
@@ -49,12 +67,71 @@ body {
     }
 }
 
+.navbar {
+    margin-bottom: 0;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.masked-overflow {
+    /* scroll bar width, for use in mask calculations */
+    --scrollbar-width: 8px;
+
+    /* mask fade distance, for use in mask calculations */
+    --mask-height: 32px;
+
+    /* If content exceeds height of container, overflow! */
+    overflow-y: auto;
+
+    /* Our height limit */
+    height: 300px;
+
+    /* Need to make sure container has bottom space,
+  otherwise content at the bottom is always faded out */
+    padding-bottom: var(--mask-height);
+
+    /* Keep some space between content and scrollbar */
+    padding-right: 20px;
+
+    /* The CSS mask */
+
+    /* The content mask is a linear gradient from top to bottom */
+    --mask-image-content: linear-gradient(to bottom,
+            transparent,
+            black var(--mask-height),
+            black calc(100% - var(--mask-height)),
+            transparent);
+
+    /* Here we scale the content gradient to the width of the container 
+  minus the scrollbar width. The height is the full container height */
+    --mask-size-content: calc(100% - var(--scrollbar-width)) 100%;
+
+    /* The scrollbar mask is a black pixel */
+    --mask-image-scrollbar: linear-gradient(black, black);
+
+    /* The width of our black pixel is the width of the scrollbar.
+  The height is the full container height */
+    --mask-size-scrollbar: var(--scrollbar-width) 100%;
+
+    /* Apply the mask image and mask size variables */
+    mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
+    mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
+
+    /* Position the content gradient in the top left, and the 
+  scroll gradient in the top right */
+    mask-position: 0 0, 100% 0;
+
+    /* We don't repeat our mask images */
+    mask-repeat: no-repeat, no-repeat;
+}
+
 .top-nav {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 10vh;
+    height: 7vh;
     padding: 1em;
     margin: 0;
 }
@@ -170,6 +247,7 @@ body {
 @media (max-width: 600px) {
     body {
         background: radial-gradient(at -20% 50%, rgb(104, 224, 204), rgb(0, 115, 81)) no-repeat;
+        background-attachment: fixed;
         transition: all .6s ease-in-out;
     }
 
@@ -238,13 +316,23 @@ body {
     }
 }
 
+/*================================================================================================*/
+/*                              Main Content                                                      */
+/*================================================================================================*/
+
+.main-1 {
+    position: relative;
+    height: fit-content;
+    z-index: 1;
+    margin-bottom: 50vh;
+}
 
 .wrapper-main {
     font-family: 'Comfortaa', cursive;
     display: flex;
     flex-direction: column;
     color: rgb(173, 195, 215);
-    height: 90vh;
+    height: fit-content;
     padding-left: 8vw;
     padding-right: 5vw;
     overflow: hidden;
@@ -252,7 +340,7 @@ body {
     animation: fadeUp cubic-bezier(0.075, 0.5, 0.4, .01) 2.5s;
 }
 
-@keyframes fadeUp {
+/* @keyframes fadeUp {
     0% {
         opacity: 0;
     }
@@ -270,7 +358,7 @@ body {
         transform: translate(0%);
         opacity: 1;
     }
-}
+} */
 
 .text-container {
     width: 100%;
@@ -323,4 +411,37 @@ h2 {
         color: rgb(250, 254, 190);
         transition: .3s;
     }
+}
+
+/*================================================================================================*/
+/*                              Footer Content                                                    */
+/*================================================================================================*/
+
+
+.footer-section {
+    display: flex;
+    justify-content: center;
+    height: 30vh;
+    width: 100%;
+    background: radial-gradient(circle at -50% -100%, rgb(50, 15, 75), rgb(15, 15, 25));
+    /* position: sticky;
+    bottom: 0;
+    left: 0; */
+}
+
+.footer-container {
+    height: inherit;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.box {
+    height: inherit;
+    width: 100%;
+    border: 2px solid blue;
+}
+
+img {
+    height: 200px;
 }
